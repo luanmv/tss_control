@@ -2,4 +2,9 @@
     <string name="app_name">Control Mario</string>
     <string name="comenzar">Comenzar</string>
     <string name="control_de_mario">Control de Mario</string>
+    <string name="valores">Valores Acelerómetro</string>
+    <string name="mario_top">Mario Top</string>
+    <string name="mario_right">Mario Right</string>
+    <string name="mario_left">Mario Left</string>
+    <string name="mario_down">Mario Down</string>
 </resources>

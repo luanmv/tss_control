@@ -8,6 +8,15 @@
     tools:context="com.example.luan.controlmario.Controles">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/valores"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
         android:id="@+id/valX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +52,8 @@
             android:layout_marginTop="34dp"
             android:layout_toEndOf="@+id/ImgLeft"
             android:layout_toRightOf="@+id/ImgLeft"
-            android:src="@drawable/mario" />
+            android:src="@drawable/mario"
+            android:contentDescription="@string/mario_down" />
 
         <ImageView
             android:id="@+id/ImgLeft"
@@ -54,7 +64,8 @@
             android:layout_marginRight="22dp"
             android:layout_toLeftOf="@+id/ImgTop"
             android:layout_toStartOf="@+id/ImgTop"
-            android:src="@drawable/mario" />
+            android:src="@drawable/mario"
+            android:contentDescription="@string/mario_left" />
 
         <ImageView
             android:id="@+id/ImgRight"
@@ -66,7 +77,8 @@
             android:layout_marginEnd="19dp"
             android:layout_marginRight="19dp"
             android:layout_marginTop="22dp"
-            android:src="@drawable/mario" />
+            android:src="@drawable/mario"
+            android:contentDescription="@string/mario_right" />
 
         <ImageView
             android:id="@+id/ImgTop"
@@ -75,9 +87,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:src="@drawable/mario" />
-
+            android:src="@drawable/mario"
+            android:contentDescription="@string/mario_top" />
     </RelativeLayout>
-
 
 </LinearLayout>
