@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Control Mario</string>
+    <string name="comenzar">Comenzar</string>
+    <string name="control_de_mario">Control de Mario</string>
+</resources>
