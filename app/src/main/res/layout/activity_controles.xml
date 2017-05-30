@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -52,8 +51,8 @@
             android:layout_marginTop="34dp"
             android:layout_toEndOf="@+id/ImgLeft"
             android:layout_toRightOf="@+id/ImgLeft"
-            android:src="@drawable/mario"
-            android:contentDescription="@string/mario_down" />
+            android:contentDescription="@string/mario_down"
+            android:src="@drawable/mario" />
 
         <ImageView
             android:id="@+id/ImgLeft"
@@ -64,8 +63,8 @@
             android:layout_marginRight="22dp"
             android:layout_toLeftOf="@+id/ImgTop"
             android:layout_toStartOf="@+id/ImgTop"
-            android:src="@drawable/mario"
-            android:contentDescription="@string/mario_left" />
+            android:contentDescription="@string/mario_left"
+            android:src="@drawable/mario" />
 
         <ImageView
             android:id="@+id/ImgRight"
@@ -77,8 +76,8 @@
             android:layout_marginEnd="19dp"
             android:layout_marginRight="19dp"
             android:layout_marginTop="22dp"
-            android:src="@drawable/mario"
-            android:contentDescription="@string/mario_right" />
+            android:contentDescription="@string/mario_right"
+            android:src="@drawable/mario" />
 
         <ImageView
             android:id="@+id/ImgTop"
@@ -87,8 +86,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:src="@drawable/mario"
-            android:contentDescription="@string/mario_top" />
+            android:contentDescription="@string/mario_top"
+            android:src="@drawable/mario" />
     </RelativeLayout>
 
 </LinearLayout>
