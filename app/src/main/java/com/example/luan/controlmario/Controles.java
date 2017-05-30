@@ -72,11 +72,18 @@ public class Controles extends Activity implements SensorEventListener {
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         synchronized (this) {
+
             int ActualX = (int) sensorEvent.values[0];
             int ActualY = (int) sensorEvent.values[1];
             int ActualZ = (int) sensorEvent.values[2];
 
-            if (between(ActualX) && between(ActualY)) {
+            if (Valores.InicialX == 0 && Valores.InicialY == 0 && Valores.InicialZ == 0) {
+                Valores.InicialX = ActualX;
+                Valores.InicialY = ActualY;
+                Valores.InicialZ = ActualZ;
+            }
+
+            if (between(Valores.InicialX) && between(Valores.InicialY)) {
                 if (ActualX != AnteriorX || ActualY != AnteriorY || ActualZ != AnteriorZ) {
                     ValorX.setText("Acelerómetro X: " + ActualX);
                     ValorY.setText("Acelerómetro Y: " + ActualY);
@@ -85,13 +92,16 @@ public class Controles extends Activity implements SensorEventListener {
                         if (ActualX < -1) {
                             Salida.writeUTF("caminar a la derecha");
                             OcultarImagenes("right");
-                        } else if (ActualX > 1) {
+                        }
+                        if (ActualX > 1) {
                             Salida.writeUTF("caminar a la izquierda");
                             OcultarImagenes("left");
-                        } else if (ActualZ < -1) {
+                        }
+                        if (ActualZ < -1) {
                             Salida.writeUTF("agachar");
                             OcultarImagenes("down");
-                        } else if (ActualZ > 1) {
+                        }
+                        if (ActualZ > 1) {
                             Salida.writeUTF("saltar");
                             OcultarImagenes("top");
                         }
@@ -103,9 +113,34 @@ public class Controles extends Activity implements SensorEventListener {
                     AnteriorY = ActualY;
                     AnteriorZ = ActualZ;
                 }
-            }
+            } else if (between(Valores.InicialY) && between(Valores.InicialZ)) {
+                if (ActualX != AnteriorX || ActualY != AnteriorY || ActualZ != AnteriorZ) {
+                    ValorX.setText("Acelerómetro X: " + ActualX);
+                    ValorY.setText("Acelerómetro Y: " + ActualY);
+                    ValorZ.setText("Acelerómetro Z: " + ActualZ);
 
-            /* else if */
+                    try {
+                        if (ActualY < -1) {
+                            Salida.writeUTF("caminar a la derecha");
+                            OcultarImagenes("top");
+                        }
+                        if (ActualY > 1) {
+                            Salida.writeUTF("caminar a la izquierda");
+                            OcultarImagenes("down");
+                        }
+                        if (ActualZ < -1) {
+                            Salida.writeUTF("agachar");
+                            OcultarImagenes("right");
+                        }
+                        if (ActualZ > 1) {
+                            Salida.writeUTF("saltar");
+                            OcultarImagenes("left");
+                        }
+                    } catch (Exception e) {
+                        Log.e("Sensor", "Falló el envio al servidor");
+                    }
+                }
+            }
 
         }
     }
