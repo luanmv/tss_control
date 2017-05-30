@@ -64,6 +64,10 @@ public class Controles extends Activity implements SensorEventListener {
         Manager.unregisterListener(this);
     }
 
+    private boolean between(int Valor) {
+        return (Valor >= -1 && Valor <= 1) ? true : false;
+    }
+
     @SuppressLint("SetTextI18n")
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
@@ -72,32 +76,37 @@ public class Controles extends Activity implements SensorEventListener {
             int ActualY = (int) sensorEvent.values[1];
             int ActualZ = (int) sensorEvent.values[2];
 
-            if (ActualX != AnteriorX || ActualY != AnteriorY || ActualZ != AnteriorZ) {
-                ValorX.setText("Acelerómetro X: " + ActualX);
-                ValorY.setText("Acelerómetro Y: " + ActualY);
-                ValorZ.setText("Acelerómetro Z: " + ActualZ);
-                try {
-                    if (ActualX < -1) {
-                        Salida.writeUTF("caminar a la derecha");
-                        OcultarImagenes("right");
-                    } else if (ActualX > 1) {
-                        Salida.writeUTF("caminar a la izquierda");
-                        OcultarImagenes("left");
-                    } else if (ActualZ < -1) {
-                        Salida.writeUTF("agachar");
-                        OcultarImagenes("down");
-                    } else if (ActualZ > 1) {
-                        Salida.writeUTF("saltar");
-                        OcultarImagenes("top");
+            if (between(ActualX) && between(ActualY)) {
+                if (ActualX != AnteriorX || ActualY != AnteriorY || ActualZ != AnteriorZ) {
+                    ValorX.setText("Acelerómetro X: " + ActualX);
+                    ValorY.setText("Acelerómetro Y: " + ActualY);
+                    ValorZ.setText("Acelerómetro Z: " + ActualZ);
+                    try {
+                        if (ActualX < -1) {
+                            Salida.writeUTF("caminar a la derecha");
+                            OcultarImagenes("right");
+                        } else if (ActualX > 1) {
+                            Salida.writeUTF("caminar a la izquierda");
+                            OcultarImagenes("left");
+                        } else if (ActualZ < -1) {
+                            Salida.writeUTF("agachar");
+                            OcultarImagenes("down");
+                        } else if (ActualZ > 1) {
+                            Salida.writeUTF("saltar");
+                            OcultarImagenes("top");
+                        }
+                    } catch (Exception e) {
+                        Log.e("Sensor", "Falló el envio al servidor");
                     }
-                } catch (Exception e) {
-                    Log.e("Sensor", "Falló el envio al servidor");
-                }
 
-                AnteriorX = ActualX;
-                AnteriorY = ActualY;
-                AnteriorZ = ActualZ;
+                    AnteriorX = ActualX;
+                    AnteriorY = ActualY;
+                    AnteriorZ = ActualZ;
+                }
             }
+
+            /* else if */
+
         }
     }
 
