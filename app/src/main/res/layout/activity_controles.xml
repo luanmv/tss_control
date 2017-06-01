@@ -16,26 +16,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/valX"
-        android:layout_width="wrap_content"
+        android:id="@+id/Etiqueta"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/holo_blue_bright"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/valY"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/valZ"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/holo_orange_dark"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -88,6 +72,54 @@
             android:layout_marginTop="30dp"
             android:contentDescription="@string/mario_top"
             android:src="@drawable/mario" />
+
+
+        <ImageView
+            android:id="@+id/ImgDown2"
+            android:layout_width="93dp"
+            android:layout_height="98dp"
+            android:layout_below="@+id/ImgLeft"
+            android:layout_marginTop="34dp"
+            android:layout_toEndOf="@+id/ImgLeft"
+            android:layout_toRightOf="@+id/ImgLeft"
+            android:contentDescription="@string/mario_down"
+            android:src="@drawable/mario_2" />
+
+        <ImageView
+            android:id="@+id/ImgLeft2"
+            android:layout_width="93dp"
+            android:layout_height="98dp"
+            android:layout_alignTop="@+id/ImgRight"
+            android:layout_marginEnd="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_toLeftOf="@+id/ImgTop"
+            android:layout_toStartOf="@+id/ImgTop"
+            android:contentDescription="@string/mario_left"
+            android:src="@drawable/mario_2" />
+
+        <ImageView
+            android:id="@+id/ImgRight2"
+            android:layout_width="93dp"
+            android:layout_height="98dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ImgTop"
+            android:layout_marginEnd="19dp"
+            android:layout_marginRight="19dp"
+            android:layout_marginTop="22dp"
+            android:contentDescription="@string/mario_right"
+            android:src="@drawable/mario_2" />
+
+        <ImageView
+            android:id="@+id/ImgTop2"
+            android:layout_width="93dp"
+            android:layout_height="98dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/mario_top"
+            android:src="@drawable/mario_2" />
     </RelativeLayout>
+
 
 </LinearLayout>

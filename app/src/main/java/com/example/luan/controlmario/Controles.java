@@ -23,8 +23,9 @@ public class Controles extends Activity implements SensorEventListener {
 
     private DataOutputStream Salida;
     private int AnteriorX = 0, AnteriorY = 0, AnteriorZ = 0;
-    private TextView ValorX, ValorY, ValorZ;
+    private TextView Etiqueta;
     private ImageView ImageTop, ImageDown, ImageLeft, ImageRight;
+    private ImageView ImageTop2, ImageDown2, ImageLeft2, ImageRight2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +33,36 @@ public class Controles extends Activity implements SensorEventListener {
         setContentView(R.layout.activity_controles);
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        ValorX = (TextView) findViewById(R.id.valX);
-        ValorY = (TextView) findViewById(R.id.valY);
-        ValorZ = (TextView) findViewById(R.id.valZ);
+        Etiqueta = (TextView) findViewById(R.id.Etiqueta);
         ImageTop = (ImageView) findViewById(R.id.ImgTop);
         ImageDown = (ImageView) findViewById(R.id.ImgDown);
         ImageLeft = (ImageView) findViewById(R.id.ImgLeft);
         ImageRight = (ImageView) findViewById(R.id.ImgRight);
-        ImageTop.setVisibility(View.INVISIBLE);
-        ImageDown.setVisibility(View.INVISIBLE);
-        ImageLeft.setVisibility(View.INVISIBLE);
-        ImageRight.setVisibility(View.INVISIBLE);
+        ImageTop2 = (ImageView) findViewById(R.id.ImgTop2);
+        ImageDown2 = (ImageView) findViewById(R.id.ImgDown2);
+        ImageLeft2 = (ImageView) findViewById(R.id.ImgLeft2);
+        ImageRight2 = (ImageView) findViewById(R.id.ImgRight2);
+        makeInvisible(1);
+        makeInvisible(2);
         Operator op = new Operator();
         op.execute();
+    }
+
+    private void makeInvisible(int option) {
+        switch (option) {
+            case 1:
+                ImageTop.setVisibility(View.INVISIBLE);
+                ImageDown.setVisibility(View.INVISIBLE);
+                ImageLeft.setVisibility(View.INVISIBLE);
+                ImageRight.setVisibility(View.INVISIBLE);
+                break;
+            case 2:
+                ImageTop2.setVisibility(View.INVISIBLE);
+                ImageDown2.setVisibility(View.INVISIBLE);
+                ImageLeft2.setVisibility(View.INVISIBLE);
+                ImageRight2.setVisibility(View.INVISIBLE);
+                break;
+        }
     }
 
     @Override
@@ -65,7 +83,7 @@ public class Controles extends Activity implements SensorEventListener {
     }
 
     private boolean between(int Valor) {
-        return (Valor >= -1 && Valor <= 1) ? true : false;
+        return (Valor >= -1 && Valor <= 1);
     }
 
     @SuppressLint("SetTextI18n")
@@ -83,27 +101,30 @@ public class Controles extends Activity implements SensorEventListener {
                 Valores.InicialZ = ActualZ;
             }
 
-            if (between(Valores.InicialX) && between(Valores.InicialY)) {
+            /* cuando el celular esta en vertical */
+          //  if (between(Valores.InicialX) || between(Valores.InicialY)) {
                 if (ActualX != AnteriorX || ActualY != AnteriorY || ActualZ != AnteriorZ) {
-                    ValorX.setText("Acelerómetro X: " + ActualX);
-                    ValorY.setText("Acelerómetro Y: " + ActualY);
-                    ValorZ.setText("Acelerómetro Z: " + ActualZ);
+
                     try {
                         if (ActualX < -1) {
                             Salida.writeUTF("caminar a la derecha");
-                            OcultarImagenes("right");
+                            Etiqueta.setText("caminar a la derecha");
+                            OcultarImagenes("right", 1);
                         }
                         if (ActualX > 1) {
                             Salida.writeUTF("caminar a la izquierda");
-                            OcultarImagenes("left");
+                            Etiqueta.setText("caminar a la izquierda");
+                            OcultarImagenes("left", 1);
                         }
                         if (ActualZ < -1) {
                             Salida.writeUTF("agachar");
-                            OcultarImagenes("down");
+                            Etiqueta.setText("agachar");
+                            OcultarImagenes("down", 1);
                         }
                         if (ActualZ > 1) {
                             Salida.writeUTF("saltar");
-                            OcultarImagenes("top");
+                            Etiqueta.setText("saltar");
+                            OcultarImagenes("top", 1);
                         }
                     } catch (Exception e) {
                         Log.e("Sensor", "Falló el envio al servidor");
@@ -113,58 +134,57 @@ public class Controles extends Activity implements SensorEventListener {
                     AnteriorY = ActualY;
                     AnteriorZ = ActualZ;
                 }
-            } else if (between(Valores.InicialY) && between(Valores.InicialZ)) {
+            //}
+            /* cuando el celular esta en horizontal */
+            /*else if (between(Valores.InicialY) && between(Valores.InicialZ)) {
                 if (ActualX != AnteriorX || ActualY != AnteriorY || ActualZ != AnteriorZ) {
-                    ValorX.setText("Acelerómetro X: " + ActualX);
-                    ValorY.setText("Acelerómetro Y: " + ActualY);
-                    ValorZ.setText("Acelerómetro Z: " + ActualZ);
-
                     try {
                         if (ActualY < -1) {
                             Salida.writeUTF("caminar a la derecha");
-                            OcultarImagenes("top");
+                            Etiqueta.setText("caminar a la derecha");
+                            OcultarImagenes("top", 2);
                         }
                         if (ActualY > 1) {
                             Salida.writeUTF("caminar a la izquierda");
-                            OcultarImagenes("down");
+                            Etiqueta.setText("caminar a la izquierda");
+                            OcultarImagenes("down", 2);
                         }
                         if (ActualZ < -1) {
                             Salida.writeUTF("agachar");
-                            OcultarImagenes("right");
+                            Etiqueta.setText("agachar");
+                            OcultarImagenes("right", 2);
                         }
                         if (ActualZ > 1) {
                             Salida.writeUTF("saltar");
-                            OcultarImagenes("left");
+                            Etiqueta.setText("saltar");
+                            OcultarImagenes("left", 2);
                         }
                     } catch (Exception e) {
                         Log.e("Sensor", "Falló el envio al servidor");
                     }
                 }
-            }
+            } */
 
         }
     }
 
-    private void OcultarImagenes(String orientacion) {
+    private void OcultarImagenes(String orientacion, int option) {
         /* pone las imágenes en invisible */
-        ImageRight.setVisibility(View.INVISIBLE);
-        ImageTop.setVisibility(View.INVISIBLE);
-        ImageDown.setVisibility(View.INVISIBLE);
-        ImageLeft.setVisibility(View.INVISIBLE);
+        makeInvisible(option);
 
         /* dependiendo su orientación, las vuelve a mostrar */
         switch (orientacion) {
             case "top":
-                ImageTop.setVisibility(View.VISIBLE);
+                (option == 1 ? ImageTop : ImageTop2).setVisibility(View.VISIBLE);
                 break;
             case "down":
-                ImageDown.setVisibility(View.VISIBLE);
+                (option == 1 ? ImageDown : ImageDown2).setVisibility(View.VISIBLE);
                 break;
             case "left":
-                ImageLeft.setVisibility(View.VISIBLE);
+                (option == 1 ? ImageLeft : ImageLeft2).setVisibility(View.VISIBLE);
                 break;
             case "right":
-                ImageRight.setVisibility(View.VISIBLE);
+                (option == 1 ? ImageRight : ImageRight2).setVisibility(View.VISIBLE);
                 break;
         }
     }
